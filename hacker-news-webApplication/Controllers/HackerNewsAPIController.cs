@@ -1,32 +1,29 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using hacker_news_webApplication.Services;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
+using hacker_news_webApplication.Interfaces;
 
 namespace hacker_news_webApplication.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class HackerNewsAPIController : ControllerBase
+    public class HackerNewsAPIController : Controller
     {
+        private IHackerNewsService _newsService;
         private IMemoryCache _memCache;
 
-        private readonly HackerNewsService _newsService;
-
-        private HackerNewsAPIController(IMemoryCache cache, HackerNewsService newsService)
+        public HackerNewsAPIController(IMemoryCache memCache, IHackerNewsService newsService)
         {
-            this._memCache = cache;
-            this._newsService = newsService;
+            _newsService = newsService;
+            _memCache = memCache;
         }
 
         private async Task<HackerNewsStory> GetStoriesAsync(int id)
         {
-            return await _memCache.GetOrCreateAsync(id, async memCacheEntry =>
+            return await _memCache.GetOrCreateAsync<HackerNewsStory>(id, async memCacheEntry =>
             {
                 HackerNewsStory hackerNewsStory = new HackerNewsStory();
 
@@ -58,44 +55,10 @@ namespace hacker_news_webApplication.Controllers
                 {
                     var word = wordSearched.ToLowerInvariant();
                     latestHackerNews = latestHackerNews.Where(h => h.Title.ToLowerInvariant().IndexOf(word) > -1
-                    || h.Author.ToLowerInvariant().IndexOf(word) > -1).ToList();
+                    || h.By.ToLowerInvariant().IndexOf(word) > -1).ToList();
                 }
-
             }
-
             return latestHackerNews;
         }
-
-        //// GET: api/HackerNewsAPI
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET: api/HackerNewsAPI/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST: api/HackerNewsAPI
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT: api/HackerNewsAPI/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

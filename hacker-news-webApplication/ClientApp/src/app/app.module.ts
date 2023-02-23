@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+//import { MatInputModule } from "@angular/material/input";
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -10,9 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
-//import { BrowserAnimationsModule } from "@angular/platform-browser/animations/src/module";
-//import { MatCardModule } from "@angular/material/card/typings/card-module";
-//import { MatInputModule } from "@angular/material/input/typings/input-module";
+//import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+//import { MatCardModule } from "@angular/material/card";
 
 
 @NgModule({

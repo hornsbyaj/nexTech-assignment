@@ -62,7 +62,7 @@ namespace hacker_news_webApplication.Controllers
                 {
                     var word = wordSearched.ToLowerInvariant();
                     latestHackerNews = latestHackerNews.Where(h => h.Title.ToLowerInvariant().IndexOf(word) > -1
-                    || h.Author.ToLowerInvariant().IndexOf(word) > -1).ToList();
+                    || h.By.ToLowerInvariant().IndexOf(word) > -1).ToList();
                 }
 
             }

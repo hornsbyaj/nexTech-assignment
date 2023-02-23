@@ -8,7 +8,7 @@ namespace hacker_news_webApplication
     public class HackerNewsStory
     {
         public string Title { get; set; }
-        public string Author { get; set; }
+        public string By { get; set; }
         public string Url { get; set; }
     }
 }
