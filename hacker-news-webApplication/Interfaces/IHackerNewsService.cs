@@ -6,9 +6,9 @@ using System.Net.Http;
 
 namespace hacker_news_webApplication.Interfaces
 {
-    public interface IHackerNewsInterface
+    public interface IHackerNewsService
     {
         Task<HttpResponseMessage> GetStoryByIdAsync(int id);
-        Task<HttpResponseMessage> LatestStoriesAsync();
+        Task<HttpResponseMessage> TopStoriesAsync();
     }
 }

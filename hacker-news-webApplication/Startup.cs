@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Routing;
+
+using hacker_news_webApplication.Interfaces;
+using hacker_news_webApplication.Services;
 
 namespace hacker_news_webApplication
 {
@@ -21,6 +25,8 @@ namespace hacker_news_webApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IHackerNewsService, HackerNewsService>();
+
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -52,7 +58,7 @@ namespace hacker_news_webApplication
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
-
+                       
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

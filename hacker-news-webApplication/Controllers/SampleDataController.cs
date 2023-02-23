@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using hacker_news_webApplication.Services;
+using Newtonsoft.Json;
+
 
 namespace hacker_news_webApplication.Controllers
 {
@@ -13,6 +16,8 @@ namespace hacker_news_webApplication.Controllers
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+
+        private HackerNewsService _newsService = new HackerNewsService();
 
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
@@ -25,6 +30,46 @@ namespace hacker_news_webApplication.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             });
         }
+
+        private async Task<HackerNewsStory> GetStoriesAsync(int id)
+        {
+            HackerNewsStory hackerNewsStory = new HackerNewsStory();
+
+            var response = await _newsService.GetStoryByIdAsync(id);
+            if (response.IsSuccessStatusCode)
+            {
+                var storyResponse = response.Content.ReadAsStringAsync().Result;
+                hackerNewsStory = JsonConvert.DeserializeObject<HackerNewsStory>(storyResponse);
+            }
+            return hackerNewsStory;
+        }
+
+        // GET: api/HackerNewsAPI
+        [HttpGet("[action]")]
+        public async Task<List<HackerNewsStory>> NewsFeed(string wordSearched)
+        {
+            List<HackerNewsStory> latestHackerNews = new List<HackerNewsStory>();
+
+            var response = await _newsService.TopStoriesAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var storyResponse = response.Content.ReadAsStringAsync().Result;
+                var topIds = JsonConvert.DeserializeObject<List<int>>(storyResponse);
+                var tasks = topIds.Select(GetStoriesAsync);
+                latestHackerNews = (await Task.WhenAll(tasks)).ToList();
+
+                if (!String.IsNullOrEmpty(wordSearched))
+                {
+                    var word = wordSearched.ToLowerInvariant();
+                    latestHackerNews = latestHackerNews.Where(h => h.Title.ToLowerInvariant().IndexOf(word) > -1
+                    || h.Author.ToLowerInvariant().IndexOf(word) > -1).ToList();
+                }
+
+            }
+
+            return latestHackerNews;
+        }
+
 
         public class WeatherForecast
         {

@@ -7,7 +7,7 @@ using hacker_news_webApplication.Interfaces;
 
 namespace hacker_news_webApplication.Services
 {
-    public class HackerNewsService : IHackerNewsInterface
+    public class HackerNewsService : IHackerNewsService
     {
         private static HttpClient client = new HttpClient();
 
@@ -19,7 +19,7 @@ namespace hacker_news_webApplication.Services
             return await client.GetAsync(string.Format("https://hacker-news.firebaseio.com/v0/item/{0}.json?print=pretty", id));
         }
 
-        public async Task<HttpResponseMessage> LatestStoriesAsync()
+        public async Task<HttpResponseMessage> TopStoriesAsync()
         {
             return await client.GetAsync("https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty");
         }

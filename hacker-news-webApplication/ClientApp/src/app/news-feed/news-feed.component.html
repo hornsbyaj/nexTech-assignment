@@ -1,16 +1,32 @@
 <h1>Hacker News Latest Stories</h1>
 
 <p *ngIf="!hackerNewsStories"><em>Loading...</em></p>
+<table class='table' *ngIf="hackerNewsStories">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author. (C)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let story of hackerNewsStories">
+      <td>{{ story.title }}</td>
+      <td>{{story.author  }}</td>
+      <td>{{story.url  }}</td>
+    </tr>
+  </tbody>
+</table>
+
 <div *ngIf="hackerNewsStories">
   <form>
-    <mat-form-field>
+    <!--<mat-form-field>
       <input matInput placeholder="Search" (keyup)="search($event)">
-    </mat-form-field>
+    </mat-form-field>-->
   </form>
-  <mat-card *ngFor="let story of hackerNewsStories" (click)="open(story.url)">
+  <!--<mat-card *ngFor="let story of hackerNewsStories" (click)="open(story.url)">
     <mat-card-content>
       <mat-card-title>{{ story.title }}</mat-card-title>
-      <mat-card-subtitle>by {{ story.by }}</mat-card-subtitle>
+      <mat-card-subtitle>by {{ story.author }}</mat-card-subtitle>
     </mat-card-content>
-  </mat-card>
+  </mat-card>-->
 </div>
