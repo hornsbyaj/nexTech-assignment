@@ -2,10 +2,10 @@
 
 <p *ngIf="!hackerNewsStories"><em>Loading...</em></p>
 <div *ngIf="hackerNewsStories">
-  <form>
-    <input placeholder="Search" (keyup)="search($event)">
-  </form>
-  <mat-card *ngFor="let story of hackerNewsStories" (click)="open(story.url)">
+
+  <input placeholder="Search Stories" type="text" [(ngModel)]="searchNews"/>
+
+  <mat-card *ngFor="let story of hackerNewsStories | filter:searchNews">
     <mat-card-content>
       <mat-card-title><strong>Title: </strong>{{ story.title }}</mat-card-title>
       <mat-card-subtitle><strong>Author: </strong>{{ story.by }}</mat-card-subtitle>

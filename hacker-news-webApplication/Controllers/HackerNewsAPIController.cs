@@ -39,7 +39,7 @@ namespace hacker_news_webApplication.Controllers
 
         // GET: api/HackerNewsAPI
         [HttpGet("[action]")]
-        public async Task<List<HackerNewsStory>> NewsFeed(string wordSearched)
+        public async Task<List<HackerNewsStory>> NewsFeed()
         {
             List<HackerNewsStory> latestHackerNews = new List<HackerNewsStory>();
 
@@ -49,14 +49,7 @@ namespace hacker_news_webApplication.Controllers
                 var storyResponse = response.Content.ReadAsStringAsync().Result;
                 var topIds = JsonConvert.DeserializeObject<List<int>>(storyResponse);
                 var tasks = topIds.Select(GetStoriesAsync);
-                latestHackerNews = (await Task.WhenAll(tasks)).ToList();
-
-                if (!String.IsNullOrEmpty(wordSearched))
-                {
-                    var word = wordSearched.ToLowerInvariant();
-                    latestHackerNews = latestHackerNews.Where(h => h.Title.ToLowerInvariant().IndexOf(word) > -1
-                    || h.By.ToLowerInvariant().IndexOf(word) > -1).ToList();
-                }
+                latestHackerNews = (await Task.WhenAll(tasks)).ToList();                
             }
             return latestHackerNews;
         }
