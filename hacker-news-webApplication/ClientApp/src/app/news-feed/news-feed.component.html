@@ -26,14 +26,14 @@
           <th>URL</th>
         </tr>
       </thead>
-      <!--<tbody>
-        <tr *ngFor="let story of hackerNewsStories| paginate: {itemsPerPage: 10, currentPage: p}">
+      <tbody>
+        <tr *ngFor="let story of hackerNewsStories">
           <td>{{story.title }}</td>
           <td>{{story.by  }}</td>
           <td ng-switch="!!story.url"><span ng-switch-when="true"><a href="{{story.url}}" target="_blank">{{story.url}}</a></span>
           <span ng-switch-when="false"></span></td>
         </tr>
-      </tbody>-->
+      </tbody>
     </table>
   </div>
   <!--<div class='pagination-container'>
