@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
+import { MatCardModule } from "@angular/material/card";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { NewsFeedComponent } from './news-feed/news-feed.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FormsModule,
     HttpClientModule,
+    MatCardModule,
     //NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
