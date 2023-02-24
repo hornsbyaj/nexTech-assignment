@@ -18,7 +18,7 @@
     </select>
   </div>-->
   <div *ngIf="hackerNewsStories">
-    <table class='table' *ngIf="hackerNewsStories" (click)="open(story.url)">
+    <table class='table' *ngIf="hackerNewsStories">
       <thead>
         <tr>
           <th>Title</th>
@@ -26,13 +26,14 @@
           <th>URL</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let story of hackerNewsStories">
+      <!--<tbody>
+        <tr *ngFor="let story of hackerNewsStories| paginate: {itemsPerPage: 10, currentPage: p}">
           <td>{{story.title }}</td>
           <td>{{story.by  }}</td>
-          <td>{{story.url  }}</td>
+          <td ng-switch="!!story.url"><span ng-switch-when="true"><a href="{{story.url}}" target="_blank">{{story.url}}</a></span>
+          <span ng-switch-when="false"></span></td>
         </tr>
-      </tbody>
+      </tbody>-->
     </table>
   </div>
   <!--<div class='pagination-container'>
