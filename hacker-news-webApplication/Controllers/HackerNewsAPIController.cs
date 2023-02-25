@@ -39,9 +39,9 @@ namespace hacker_news_webApplication.Controllers
 
         // GET: api/HackerNewsAPI
         [HttpGet("[action]")]
-        public async Task<List<HackerNewsStory>> NewsFeed()
+        public async Task<List<HackerNewsStory>> TopStories()
         {
-            List<HackerNewsStory> latestHackerNews = new List<HackerNewsStory>();
+            List<HackerNewsStory> topStories = new List<HackerNewsStory>();
 
             var response = await _newsService.TopStoriesAsync();
             if (response.IsSuccessStatusCode)
@@ -49,9 +49,9 @@ namespace hacker_news_webApplication.Controllers
                 var storyResponse = response.Content.ReadAsStringAsync().Result;
                 var topIds = JsonConvert.DeserializeObject<List<int>>(storyResponse);
                 var tasks = topIds.Select(GetStoriesAsync);
-                latestHackerNews = (await Task.WhenAll(tasks)).ToList();                
+                topStories = (await Task.WhenAll(tasks)).ToList();                
             }
-            return latestHackerNews;
+            return topStories;
         }
     }
 }
