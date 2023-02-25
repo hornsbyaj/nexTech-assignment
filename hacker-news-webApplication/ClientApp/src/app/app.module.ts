@@ -11,7 +11,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
 
 
@@ -20,7 +19,6 @@ import { NewsFeedComponent } from './news-feed/news-feed.component';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    FetchDataComponent,
     NewsFeedComponent
   ],
   imports: [
@@ -33,7 +31,6 @@ import { NewsFeedComponent } from './news-feed/news-feed.component';
     //NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'news-feed', component: NewsFeedComponent },
     ])
   ],
