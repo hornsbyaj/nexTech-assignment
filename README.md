@@ -1,6 +1,6 @@
 # nexTech-assignment
 
-## Hacker News API
+## Hacker News API .Net Core and Angular Web Application
 
 ### Overview
 
