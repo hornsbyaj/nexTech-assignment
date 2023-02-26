@@ -23,7 +23,7 @@ namespace hacker_news_webApplication.Controllers
 
         private async Task<HackerNewsStory> GetStoriesAsync(int id)
         {
-            return await _memCache.GetOrCreateAsync<HackerNewsStory>(id, async memCacheEntry =>
+            return await _memCache.GetOrCreateAsync(id, async memCacheEntry =>
             {
                 HackerNewsStory hackerNewsStory = new HackerNewsStory();
 
@@ -39,9 +39,9 @@ namespace hacker_news_webApplication.Controllers
 
         // GET: api/HackerNewsAPI
         [HttpGet("[action]")]
-        public async Task<List<HackerNewsStory>> NewsFeed(string wordSearched)
+        public async Task<List<HackerNewsStory>> TopStories()
         {
-            List<HackerNewsStory> latestHackerNews = new List<HackerNewsStory>();
+            List<HackerNewsStory> topStories = new List<HackerNewsStory>();
 
             var response = await _newsService.TopStoriesAsync();
             if (response.IsSuccessStatusCode)
@@ -49,16 +49,9 @@ namespace hacker_news_webApplication.Controllers
                 var storyResponse = response.Content.ReadAsStringAsync().Result;
                 var topIds = JsonConvert.DeserializeObject<List<int>>(storyResponse);
                 var tasks = topIds.Select(GetStoriesAsync);
-                latestHackerNews = (await Task.WhenAll(tasks)).ToList();
-
-                if (!String.IsNullOrEmpty(wordSearched))
-                {
-                    var word = wordSearched.ToLowerInvariant();
-                    latestHackerNews = latestHackerNews.Where(h => h.Title.ToLowerInvariant().IndexOf(word) > -1
-                    || h.By.ToLowerInvariant().IndexOf(word) > -1).ToList();
-                }
+                topStories = (await Task.WhenAll(tasks)).ToList();                
             }
-            return latestHackerNews;
+            return topStories;
         }
     }
 }

@@ -7,7 +7,7 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' [routerLink]='["/"]'>hacker_news_webApplication</a>
+            <a class='navbar-brand' [routerLink]='["/"]'>Hacker News for NexTech</a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse' [ngClass]='{ "in": isExpanded }'>
@@ -18,18 +18,8 @@
               </a>
             </li>
             <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/counter"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-education'></span> Counter
-              </a>
-            </li>
-            <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-th-list'></span> Fetch data
-              </a>
-            </li>
-            <li [routerLinkActive]='["link-active"]'>
               <a [routerLink]='["/news-feed"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-th-list'></span> Hacker News Feed
+                <span class='glyphicon glyphicon-th-list'></span> Hacker News
               </a>
             </li>
           </ul>
