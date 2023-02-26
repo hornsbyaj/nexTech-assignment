@@ -2,9 +2,7 @@
 
 <p *ngIf="!hackerNewsStories"><em>Loading...</em></p>
 <div *ngIf="hackerNewsStories">
-
   <input placeholder="Search Stories" type="text" [(ngModel)]="searchNews" />
-
   <mat-card *ngFor="let story of hackerNewsStories | filter:searchNews | paginate:{itemsPerPage: itemsPerPage,
             currentPage: page, totalItems: totalItems}">
     <mat-card-content>
@@ -18,5 +16,6 @@
       </mat-card-subtitle>
     </mat-card-content>
   </mat-card>
-  <pagination-controls class="pagi" (pageChange)="page=$event"></pagination-controls>
 </div>
+<pagination-controls class="pagi" (pageChange)="page=$event"></pagination-controls>
+
