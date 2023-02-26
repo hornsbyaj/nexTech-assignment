@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\app.server.module.ts" />
+    <None Remove="ClientApp\src\app\home\home.component.spec.ts" />
     <None Remove="ClientApp\src\app\nav-menu.component.spec.ts" />
     <None Remove="ClientApp\src\app\nav-menu\nav-menu.component.spec.ts" />
     <None Remove="ClientApp\src\app\news-feed\news-feed.component.spec.ts" />
@@ -34,6 +35,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\app.server.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\nav-menu\nav-menu.component.spec.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\news-feed\news-feed.component.spec.ts" />
   </ItemGroup>

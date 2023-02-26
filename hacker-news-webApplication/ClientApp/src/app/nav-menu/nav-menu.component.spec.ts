@@ -20,7 +20,7 @@ describe('NavMenuComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create nav menu component', () => {
     expect(component).toBeTruthy();
   });
 
