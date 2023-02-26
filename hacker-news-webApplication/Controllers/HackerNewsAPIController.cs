@@ -23,7 +23,7 @@ namespace hacker_news_webApplication.Controllers
 
         private async Task<HackerNewsStory> GetStoriesAsync(int id)
         {
-            return await _memCache.GetOrCreateAsync<HackerNewsStory>(id, async memCacheEntry =>
+            return await _memCache.GetOrCreateAsync(id, async memCacheEntry =>
             {
                 HackerNewsStory hackerNewsStory = new HackerNewsStory();
 

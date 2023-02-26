@@ -3,9 +3,10 @@
 <p *ngIf="!hackerNewsStories"><em>Loading...</em></p>
 <div *ngIf="hackerNewsStories">
 
-  <input placeholder="Search Stories" type="text" [(ngModel)]="searchNews"/>
+  <input placeholder="Search Stories" type="text" [(ngModel)]="searchNews" />
 
-  <mat-card *ngFor="let story of hackerNewsStories | filter:searchNews">
+  <mat-card *ngFor="let story of hackerNewsStories | filter:searchNews | paginate:{itemsPerPage: itemsPerPage,
+            currentPage: page, totalItems: totalItems}">
     <mat-card-content>
       <mat-card-title><strong>Title: </strong>{{ story.title }}</mat-card-title>
       <mat-card-subtitle><strong>Author: </strong>{{ story.by }}</mat-card-subtitle>
@@ -17,20 +18,5 @@
       </mat-card-subtitle>
     </mat-card-content>
   </mat-card>
+  <pagination-controls class="pagi" (pageChange)="page=$event"></pagination-controls>
 </div>
-
-
-<!--<div class='pagination-container'>
-  <nav>
-    <ul class="pagination">
-      <li data-page="prev">
-        <span> < <span class="sr-only">(current)</span></span>
-      </li>-->
-<!--	Here the JS Function Will Add the Rows -->
-<!--<li data-page="next" id="prev">
-          <span> > <span class="sr-only">(current)</span></span>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</div>-->

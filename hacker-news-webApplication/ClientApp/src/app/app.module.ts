@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-//import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -28,7 +28,7 @@ import { NewsFeedComponent } from './news-feed/news-feed.component';
     MatCardModule,
     MatInputModule,
     Ng2SearchPipeModule,
-    //NgxPaginationModule,
+    NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'news-feed', component: NewsFeedComponent },
