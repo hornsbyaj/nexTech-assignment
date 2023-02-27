@@ -12,7 +12,7 @@ export class NewsFeedComponent {
   itemsPerPage = 5;
   totalItems: any;
   constructor(private readonly http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.http.get<HackerNewsStories[]>(this.baseUrl + 'api/HackerNewsAPI/TopStories').subscribe(result => {
+    this.http.get<HackerNewsStories[]>(this.baseUrl + 'api/HackerNewsAPI/GetTopStories').subscribe(result => {
       this.hackerNewsStories = result;
     },
       error => console.error(error));

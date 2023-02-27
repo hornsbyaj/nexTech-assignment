@@ -39,7 +39,7 @@ namespace hacker_news_webApplication.Controllers
 
         // GET: api/HackerNewsAPI
         [HttpGet("[action]")]
-        public async Task<List<HackerNewsStory>> TopStories()
+        public async Task<List<HackerNewsStory>> GetTopStories()
         {
             List<HackerNewsStory> topStories = new List<HackerNewsStory>();
 
